@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<h1>CRUD</h1>
+<a href="/insert">Create a user</a>
+<h2>Current Users</h2>
+    {% for row in users %}
+        <tr>{{row.2}}</tr><a href="/update">Update User</a><a href="/delete">Delete User</a><<br>
+    {% endfor %}
+{% endblock %}

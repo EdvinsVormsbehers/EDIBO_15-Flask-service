@@ -17,3 +17,12 @@ db = pymysql.connect(host="localhost",
                      charset="utf8mb4",
                      cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
+
+
+@app.route('/')
+def index():
+    cursor.execute("SELECT * FROM users")
+    show_users = cursor.fetchall()
+
+    return render_template('index.html', users=show_users)
+
