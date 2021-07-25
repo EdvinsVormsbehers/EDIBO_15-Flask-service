@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+{% for row in users %}
+<form action="{{url_for('delete')}}" method="post">
+    <input type="hidden"  name="id" value="{{row.0}}">
+    Username:<input type="text" name="Username" id="username" value="{{row.2}}">
+    Password:<input type="text" name="Password" id="password" value="{{row.3}}">
+    <input type="submit" name="Delete">
+    <a href="/">Show users</a>
+</form>
+{% endfor %}
+{% endblock %}

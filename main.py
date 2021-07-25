@@ -52,3 +52,20 @@ def update():
         return redirect(url_for('index'))
     else:
         return render_template('update_user.html', users=show_users)
+
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    cursor.execute("SELECT * FROM users")
+    show_users = cursor.fetchall()
+    if request.method == "POST":
+        id = request.form['id']
+        cursor.execute("DELETE FROM users WHERE UserId = %s", (id))
+        db.commit()
+        return redirect(url_for('index'))
+    else:
+        return render_template('delete_user.html', users=show_users)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
