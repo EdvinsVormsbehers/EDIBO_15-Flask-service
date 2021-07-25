@@ -38,3 +38,17 @@ def insert():
     else:
         return render_template('user.html')
 
+
+@app.route('/update', methods=['GET', 'POST'])
+def update():
+    cursor.execute("SELECT * FROM users")
+    show_users = cursor.fetchall()
+    if request.method == "POST":
+        id = request.form['id']
+        Username = request.form['Username']
+        Password = request.form['Password']
+        cursor.execute("UPDATE users SET User_name = %s, User_password = %s WHERE UserId = %s", (Username, Password, id))
+        db.commit()
+        return redirect(url_for('index'))
+    else:
+        return render_template('update_user.html', users=show_users)
