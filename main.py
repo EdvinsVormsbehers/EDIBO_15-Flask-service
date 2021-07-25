@@ -26,3 +26,15 @@ def index():
 
     return render_template('index.html', users=show_users)
 
+
+@app.route('/insert', methods=['GET', 'POST'])
+def insert():
+    if request.method == "POST":
+        Username = request.form['Username']
+        Password = request.form['Password']
+        cursor.execute("INSERT INTO users (EmployeeId, User_name, User_password, User) VALUES (%s, %s, %s, %s)", (1, Username, Password, 1))
+        db.commit()
+        return redirect(url_for('insert'))
+    else:
+        return render_template('user.html')
+
